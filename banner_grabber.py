@@ -1,3 +1,4 @@
+import argparse
 import socket
 
 
@@ -53,14 +54,30 @@ def grab_banner(target, port, timeout=2):
 
 
 def main():
-    target = input("Enter target IP: ")
+    parser = argparse.ArgumentParser(
+        description="Basic TCP port scanner and banner grabber."
+    )
+
+    parser.add_argument(
+        "target", help="The target IP address or hostname"
+    )
+
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=2,
+        help="Timeout for socket connections. Default is 2 seconds."
+    )
+
+    args = parser.parse_args()
+
     ports = [21, 22, 25, 80, 110, 443, 3306]
 
     for port in ports:
-        status = scan_port(target, port)
+        status = scan_port(args.target, port)
 
         if status == "open":
-            banner = grab_banner(target, port)
+            banner = grab_banner(args.target, port)
             print(f"Port {port} ({status}) | Banner: {banner}")
         else:
             print(f"Port {port}: {status}")
