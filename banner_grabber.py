@@ -15,10 +15,13 @@ def scan_port(target, port):
          return "open"
      else:
          return "closed/filtered"
+def main():
+    target = input("Enter target IP: ")
+    ports = [21, 22, 25, 80, 110, 443, 3306]
 
-target = input("Enter target IP: ")
-ports = [21, 22, 25, 80, 110, 443, 3306]
+    for port in ports:
+        status = scan_port(target, port)
+        print(f"Port {port}: {status}")
 
-for port in ports:
-    status = scan_port(target, port)
-    print(f"Port {port}: {status}")
+if __name__ == "__main__":
+    main()
