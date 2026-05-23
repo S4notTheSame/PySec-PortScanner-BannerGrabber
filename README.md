@@ -5,6 +5,7 @@ A small Python cybersecurity project for learning basic TCP port scanning and ba
 ## Current Features
 
 - Scans selected TCP ports on a target IP address
+- The banner grabbing function first checks whether a TCP port is open. For open ports, it attempts to read service information from the socket. For HTTP-like ports, the scanner sends a simple HEAD request because web servers usually do not send banners until they receive a valid HTTP request.
 - Uses Python sockets
 - Prints whether ports are open or closed/filtered
 - Default tested ports: 21, 22, 25, 80, 110, 443, 3306
